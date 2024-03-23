@@ -278,11 +278,13 @@ class Controller(Actions):
                 event_mapped = self.map_event(
                     button_id, button_type, value, overflow, self.debug
                 )
-                logger.debug(f"Current speed: {self.cur_speed}, time: {time.time()}.")
+                logger.debug(
+                    f"Current speed: {self.cur_speed}, time: {time.time()}, {self.accelerating=}, {self.stopping=}"
+                )
                 if self.accelerating:
                     logger.debug("Accelerating in controller.")
                     r2_value = None
-                    if event_mapped.R2_pressed():
+                    if event is not None and event_mapped.R2_pressed():
                         r2_value = event_mapped.value
                     logger.debug(f"Accelerating from controller with {r2_value}.")
                     self.on_R2_press(r2_value)
