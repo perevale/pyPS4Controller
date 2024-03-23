@@ -162,6 +162,7 @@ class Actions:
         """this event is only detected when connecting without ds4drv"""
         pass
 
+
 class Controller(Actions):
     def __init__(
         self,
@@ -236,9 +237,7 @@ class Controller(Actions):
                 on_connect()
 
         def wait_for_interface():
-            print(
-                f"Waiting for interface: {self.interface} to become available . . ."
-            )
+            print(f"Waiting for interface: {self.interface} to become available . . .")
             for i in range(timeout):
                 if os.path.exists(self.interface):
                     print(f"Successfully bound to: {self.interface}.")
@@ -279,7 +278,7 @@ class Controller(Actions):
                 event_mapped = self.map_event(
                     button_id, button_type, value, overflow, self.debug
                 )
-                logger.debug(f"Current speed: {self.cur_speed}.")
+                logger.debug(f"Current speed: {self.cur_speed}, time: {time.time()}.")
                 if self.accelerating:
                     logger.debug("Accelerating in controller.")
                     r2_value = None
